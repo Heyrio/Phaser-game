@@ -6,12 +6,14 @@ var eve;
 var speed = 4;
 demo.state0.prototype = {
     preload: function(){
+        game.load.image('bg', '../assets/sprites/bg.png')
         game.load.image('eve', '../assets/sprites/char1.png')
     },
     create: function(){
         game.stage.backgroundColor = '#dddddd';
         console.log("you're in state0");
-        eve = game.add.sprite(centerX, centerY, 'eve');
+        var bg = game.add.sprite(0,0,'bg');
+        eve = game.add.sprite(centerX, centerY+380, 'eve');
         addChangeStateEventListeners();
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         eve.anchor.setTo(0.5, 0.5);
