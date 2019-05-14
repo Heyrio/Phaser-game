@@ -8,7 +8,7 @@ demo.state0.prototype = {
         console.log("you're in state0");
         
         addChangeStateEventListeners();
-
+        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     },
     update: function(){}
 }
