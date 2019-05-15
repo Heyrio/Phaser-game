@@ -7,23 +7,33 @@ var speed = 4;
 demo.state0.prototype = {
     preload: function(){
         game.load.image('bg', '../assets/sprites/bg.png')
-        game.load.image('eve', '../assets/sprites/char1.png')
+        game.load.spritesheet('eve','../assets/sprites/char.png', 240,370)
     },
     create: function(){
         game.stage.backgroundColor = '#dddddd';
         console.log("you're in state0");
         var bg = game.add.sprite(0,0,'bg');
-        eve = game.add.sprite(centerX, centerY+380, 'eve');
+        eve = game.add.sprite(66, centerY+380, 'eve');
         addChangeStateEventListeners();
+        game.world.setBounds(0,0,2813, 1000);
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         eve.anchor.setTo(0.5, 0.5);
+        eve.animations.add('walk', [0,1,2]);
+        game.camera.follow(eve);
+
+        game.camera.deadzone = new Phaser.Rectangle(centerX+300, 0 , 600, 1000);
     },
     update: function(){
         if(game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
             eve.x +=speed;
+            eve.animations.play('walk', 10, true)
+
         }else if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
             eve.x -=speed;
-
+            eve.animations.play('walk', 10, true)
+        }else{
+            eve.animations.stop('walk');
+            eve.frame = 0;
         }
     }
 }
